@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي البوابات - نظام الحماية المتقدم</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f13; color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .page { display: none; background: #1c1c24; padding: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.8); width: 320px; text-align: center; border: 1px solid #2d2d38; }
+        .page.active { display: block; animation: slideIn 0.4s ease-out; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #3d3d4e; border-radius: 6px; background-color: #252530; color: white; outline: none; transition: 0.3s; }
+        input:focus { border-color: #007bff; }
+        button { width: 100%; padding: 12px; background-color: #0056d2; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; font-size: 16px; transition: 0.3s; }
+        button:hover { background-color: #0044a8; }
+        
+        /* تقنية إخفاء مصيدة العسل (Honeypot) بشكل ذكي لا تكتشفه البوتات بسهولة */
+        .honeypot-container { opacity: 0; position: absolute; top: 0; left: -9000px; height: 0; width: 0; z-index: -1; }
+        
+        @keyframes slideIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <div class="honeypot-container">
+            <input type="text" id="fake-phone" name="phone" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div id="stage-choice" class="page active" data-stage="0">
+            <h2>بوابة الدخول</h2>
+            <p style="color: #888; font-size: 14px;">يرجى اختيار مسارك</p>
+            <button onclick="processStage('stage-login')">لدي حساب مسبق</button>
+            <button onclick="processStage('stage-signup-1')">إنشاء حساب جديد</button>
+        </div>
+
+        <div id="stage-login" class="page" data-stage="1">
+            <h2>تسجيل الدخول</h2>
+            <input type="text" id="login-username" placeholder="اسم المستخدم" class="track-input">
+            <input type="password" id="login-password" placeholder="كلمة المرور" class="track-input">
+            <button onclick="processStage('stage-success')">دخول</button>
+        </div>
+
+        <div id="stage-signup-1" class="page" data-stage="2">
+            <h2>إنشاء حساب (1/2)</h2>
+            <input type="text" id="signup-fname" placeholder="الاسم الأول" class="track-input">
+            <input type="text" id="signup-lname" placeholder="اللقب" class="track-input">
+            <input type="date" id="signup-dob" class="track-input">
+            <button onclick="processStage('stage-signup-2')">التالي</button>
+        </div>
+
+        <div id="stage-signup-2" class="page" data-stage="3">
+            <h2>إنشاء حساب (2/2)</h2>
+            <input type="email" id="signup-email" placeholder="البريد الإلكتروني" class="track-input">
+            <input type="password" id="signup-pass" placeholder="كلمة المرور" class="track-input">
+            <input type="password" id="signup-pass-confirm" placeholder="تأكيد كلمة المرور" class="track-input">
+            <button onclick="processStage('stage-success')">إنهاء التسجيل</button>
+        </div>
+
+        <div id="stage-success" class="page" data-stage="4">
+            <h2>اكتملت الخطوات</h2>
+            <p>اضغط للتحقق النهائي وإتمام العملية</p>
+            <button id="final-btn" onclick="completeProcess()">تأكيد النجاح</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
