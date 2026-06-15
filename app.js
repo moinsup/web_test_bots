@@ -1,5 +1,5 @@
 // 1. إعدادات لوحة التحكم (انسخ رابط الـ Webhook الخاص بالديسكورد وضعه هنا)
-const DISCORD_WEBHOOK_URL = "ضع_رابط_الـ_WEBHOOK_هنا";
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1515881381895475382/6YPxfqt1WZBkUUKElfWB3eLfDZzxvSpViF7A6tex6DBpSRNW1ZN1VUAxfu1DRowMXkrl";
 
 // 2. النظام المركزي لجمع البيانات والمراقبة
 const SecuritySystem = {
